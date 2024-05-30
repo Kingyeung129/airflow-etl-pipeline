@@ -1,22 +1,22 @@
-from datetime import datetime
+import pytz
 
+from datetime import datetime
 from airflow.models import DAG
 from airflow.operators.dummy_operator import DummyOperator
-
-# from airflow.operators.bash_operator import BashOperator
 from airflow.operators.python_operator import PythonOperator
-
 from crypto_etl import scrape, transform, load
 
+
+time_zone = pytz.timezone("Asia/Singapore")
 default_args = {
     "owner": "admin",
-    "start_date": datetime(2024, 5, 29, 12, 0, 0),
+    "start_date": datetime(2024, 5, 31, 0, 48, 0, tzinfo=time_zone),
     "retries": 1,
-    "schedule_interval": "*/5 * * * *",
+    "catchup": False,
 }
 
 with DAG(
-    dag_id="crypto_etl", default_args=default_args, schedule_interval="@once"
+    dag_id="crypto_etl", default_args=default_args, schedule_interval="*/5 * * * *"
 ) as dag:
 
     task_start = DummyOperator(task_id="task_start")
