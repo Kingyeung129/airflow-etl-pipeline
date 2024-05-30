@@ -14,7 +14,10 @@ def fetch_api():
     if res.status_code == 200:
         print("API successfully called...")
         print(res.json())
-        return res.json()
+        timestamp = res.headers.get("Date")
+        prices = res.json()
+        data = {"timestamp": timestamp, "prices": prices}
+        return data
     print("API call failed...")
     return False
 
