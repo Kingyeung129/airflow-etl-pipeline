@@ -38,11 +38,6 @@ def transform_data(data):
         df.loc[0, "timestamp"] = gmt_timestamp.astimezone(
             pytz.timezone("Asia/Singapore")
         ).strftime("%Y-%m-%d %H:%M:%S")
-        fp = os.path.join(
-            os.path.dirname(__file__),
-            os.environ.get("DATA_DIR"),
-            os.environ.get("TRANSFORMED_DATA_FILE"),
-        )
     except Exception as e:
         print(e)
         print("Failed transforming data.")
@@ -56,8 +51,8 @@ def save_data(data=pd.DataFrame()):
     print("Saving transformed data...")
     fp = os.path.join(
         os.path.dirname(__file__),
-        os.environ.get("DATA_DIR"),
-        os.environ.get("TRANSFORMED_DATA_FILE"),
+        os.getenv("DATA_DIR"),
+        os.getenv("TRANSFORMED_DATA_FILE"),
     )
     print(f"Output file path will be: {fp}")
     data.to_csv(fp, index=False)
@@ -67,8 +62,8 @@ def save_data(data=pd.DataFrame()):
 def main():
     fp = os.path.join(
         os.path.dirname(__file__),
-        os.environ.get("DATA_DIR"),
-        os.environ.get("SCRAPED_DATA_FILE"),
+        os.getenv("DATA_DIR"),
+        os.getenv("SCRAPED_DATA_FILE"),
     )
     if not check_scraped_data_exists(fp):
         return False

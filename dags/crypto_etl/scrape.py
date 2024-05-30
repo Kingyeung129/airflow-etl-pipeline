@@ -9,7 +9,7 @@ load_dotenv()
 
 def fetch_api():
     print("Fetching API...")
-    api, api_key = (os.environ.get("API_URL"), os.environ.get("API_KEY"))
+    api, api_key = (os.getenv("API_URL"), os.getenv("API_KEY"))
     res = req.get(api)
     if res.status_code == 200:
         print("API successfully called...")
@@ -26,8 +26,8 @@ def save_data(data=[]):
     print("Saving data from API...")
     fp = os.path.join(
         os.path.dirname(__file__),
-        os.environ.get("DATA_DIR"),
-        os.environ.get("SCRAPED_DATA_FILE"),
+        os.getenv("DATA_DIR"),
+        os.getenv("SCRAPED_DATA_FILE"),
     )
     print(f"Output file path will be: {fp}")
     with open(fp, "w") as f:
@@ -41,7 +41,7 @@ def main():
         return False
     save_file_status = save_data(data)
     if save_file_status:
-        print(f"Data saved to {os.environ.get('SCRAPED_DATA_FILE')}.")
+        print(f"Data saved to {os.getenv('SCRAPED_DATA_FILE')}.")
     else:
         print("Could not save json data to flat file.")
     print("Scraping script execution completed!")
