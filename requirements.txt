@@ -32,9 +32,11 @@ croniter==2.0.5
 cryptography==42.0.7
 Deprecated==1.2.14
 dill==0.3.8
+distlib==0.3.8
 dnspython==2.6.1
 docutils==0.21.2
 email_validator==2.1.1
+filelock==3.14.0
 Flask==2.2.5
 Flask-AppBuilder==4.4.1
 Flask-Babel==2.0.0
@@ -90,9 +92,10 @@ opentelemetry-sdk==1.24.0
 opentelemetry-semantic-conventions==0.45b0
 ordered-set==4.1.0
 packaging==24.0
-pandas==2.2.2
+pandas==2.1.0
 pathspec==0.12.1
 pendulum==3.0.0
+platformdirs==4.2.2
 pluggy==1.5.0
 prison==0.2.1
 protobuf==4.25.3
@@ -133,6 +136,7 @@ uc-micro-py==1.0.3
 unicodecsv==0.14.1
 universal_pathlib==0.2.2
 urllib3==2.2.1
+virtualenv==20.26.2
 Werkzeug==2.2.3
 wirerope==0.4.7
 wrapt==1.16.0
