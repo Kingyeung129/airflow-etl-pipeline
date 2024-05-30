@@ -1,0 +1,3 @@
+load_examples = False
+executor = LocalExecutor
+sql_alchemy_conn = postgresql+psycopg2://USERNAME:PASSWORD@HOSTNAME/DBNAME
