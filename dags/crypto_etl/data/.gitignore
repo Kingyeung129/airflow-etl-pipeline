@@ -1,0 +1,3 @@
+# Data files (flat files e.g. CSV, JSON)
+*.csv
+*.json
