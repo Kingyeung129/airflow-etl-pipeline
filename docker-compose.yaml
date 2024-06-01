@@ -1,0 +1,28 @@
+services:
+  postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: airflow_user
+      POSTGRES_PASSWORD: {PLEASE_CHANGE_THIS}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./setup/postgres:/docker-entrypoint-initdb.d
+    ports:
+      - 5432:5432
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $POSTGRES_USER"]
+
+  airflow:
+    build: .
+    depends_on:
+      - postgres
+    environment:
+      AIRFLOW__CORE__DAGS_FOLDER: /airflow-etl-pipeline/dags
+      AIRFLOW__CORE__LOAD_EXAMPLES: False
+      AIRFLOW__CORE__EXECUTOR: LocalExecutor
+      AIRFLOW__CORE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow_user:{PLEASE_CHANGE_THIS}@postgres:5432/airflow
+    ports:
+      - "8080:8080"
+
+volumes:
+  postgres_data:
